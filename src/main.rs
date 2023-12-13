@@ -1,6 +1,9 @@
 #![no_std]
 #![no_main]
 
+extern crate alloc;
+
+mod allocator;
 mod mutex;
 
 use core::{arch::global_asm, panic::PanicInfo};
@@ -13,4 +16,6 @@ fn panic(_info: &PanicInfo) -> ! {
 }
 
 #[no_mangle]
-extern "C" fn kmain() {}
+extern "C" fn kmain() {
+    allocator::init();
+}
