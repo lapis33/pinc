@@ -34,6 +34,7 @@ pub struct MutexGuard<'a, T> {
 
 impl<T> Deref for MutexGuard<'_, T> {
     type Target = T;
+
     fn deref(&self) -> &Self::Target {
         unsafe { &*self.lock.value.get() }
     }
