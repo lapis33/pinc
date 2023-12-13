@@ -1,6 +1,8 @@
 #![no_std]
 #![no_main]
 
+mod mutex;
+
 use core::{arch::global_asm, panic::PanicInfo};
 
 global_asm!(include_str!("entry.s"));
