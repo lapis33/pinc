@@ -17,6 +17,4 @@ fn panic(_info: &PanicInfo) -> ! {
 }
 
 #[no_mangle]
-extern "C" fn kmain() {
-    allocator::init();
-}
+extern "C" fn kmain() {}

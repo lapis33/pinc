@@ -1,9 +1,10 @@
+use crate::lazy::Lazy;
 use crate::mutex::Mutex;
 use core::alloc::{GlobalAlloc, Layout};
 use core::ptr::null_mut;
 
 #[global_allocator]
-static ALLOCATOR: Mutex<Allocator> = Mutex::new(Allocator::empty());
+static ALLOCATOR: Mutex<Lazy<Allocator>> = Mutex::new(Lazy::new(|| Allocator::new()));
 
 static mut HEAP: [u8; 65536] = [0; 65536];
 
@@ -13,12 +14,18 @@ struct Allocator {
 }
 
 impl Allocator {
-    const fn empty() -> Self {
-        Self { end: 0, next: 0 }
+    fn new() -> Self {
+        let start = unsafe { HEAP.as_mut_ptr() as usize };
+        let size = unsafe { HEAP.len() };
+
+        Self {
+            end: start + size,
+            next: start,
+        }
     }
 }
 
-unsafe impl GlobalAlloc for Mutex<Allocator> {
+unsafe impl GlobalAlloc for Mutex<Lazy<Allocator>> {
     unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
         let mut allocator = self.lock();
 
@@ -41,13 +48,4 @@ unsafe impl GlobalAlloc for Mutex<Allocator> {
     }
 
     unsafe fn dealloc(&self, _ptr: *mut u8, _layout: Layout) {}
-}
-
-pub fn init() {
-    let start = unsafe { HEAP.as_mut_ptr() as usize };
-    let size = unsafe { HEAP.len() };
-
-    let mut allocator = ALLOCATOR.lock();
-    allocator.end = start + size;
-    allocator.next = start;
 }
