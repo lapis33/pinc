@@ -19,7 +19,8 @@ use core::{arch::global_asm, panic::PanicInfo};
 global_asm!(include_str!("entry.s"));
 
 #[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
+fn panic(info: &PanicInfo) -> ! {
+    uart_println!("{}", info);
     loop {}
 }
 
