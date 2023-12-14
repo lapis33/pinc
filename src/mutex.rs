@@ -1,8 +1,10 @@
 use core::cell::UnsafeCell;
 use core::hint::spin_loop;
 use core::ops::{Deref, DerefMut};
-use core::sync::atomic::AtomicBool;
-use core::sync::atomic::Ordering::{Acquire, Release};
+use core::sync::atomic::{
+    AtomicBool,
+    Ordering::{Acquire, Release},
+};
 
 pub struct Mutex<T> {
     locked: AtomicBool,
