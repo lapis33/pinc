@@ -1,5 +1,5 @@
-use crate::lazy::Lazy;
-use crate::mutex::Mutex;
+use crate::utils::lazy::Lazy;
+use crate::utils::mutex::Mutex;
 use core::alloc::{GlobalAlloc, Layout};
 use core::ptr::null_mut;
 

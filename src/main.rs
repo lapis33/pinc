@@ -4,8 +4,11 @@
 extern crate alloc;
 
 mod allocator;
-mod lazy;
-mod mutex;
+
+mod utils {
+    pub mod lazy;
+    pub mod mutex;
+}
 
 use core::{arch::global_asm, panic::PanicInfo};
 
