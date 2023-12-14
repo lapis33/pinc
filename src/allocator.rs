@@ -4,7 +4,7 @@ use core::alloc::{GlobalAlloc, Layout};
 use core::ptr::null_mut;
 
 #[global_allocator]
-static ALLOCATOR: Mutex<Lazy<Allocator>> = Mutex::new(Lazy::new(|| Allocator::new()));
+static ALLOCATOR: Mutex<Lazy<Allocator>> = Mutex::new(Lazy::new(Allocator::new));
 
 static mut HEAP: [u8; 65536] = [0; 65536];
 
