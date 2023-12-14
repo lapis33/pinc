@@ -5,6 +5,10 @@ extern crate alloc;
 
 mod allocator;
 
+mod drivers {
+    pub mod uart;
+}
+
 mod utils {
     pub mod lazy;
     pub mod mutex;
