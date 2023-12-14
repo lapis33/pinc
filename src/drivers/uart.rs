@@ -42,7 +42,7 @@ impl Uart {
 
 impl Write for Uart {
     fn write_str(&mut self, s: &str) -> Result {
-        for byte in s.replace("\n", "\n\r").bytes() {
+        for byte in s.replace('\n', "\n\r").bytes() {
             loop {
                 if Uart::read_lsr_thre() {
                     Uart::write_thr(byte);
