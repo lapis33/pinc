@@ -25,4 +25,6 @@ fn panic(info: &PanicInfo) -> ! {
 }
 
 #[no_mangle]
-extern "C" fn kmain() {}
+extern "C" fn kmain() {
+    uart_println!("Hello, world!");
+}
