@@ -1,6 +1,6 @@
-.global _entry
+.global entry
 
-_entry:
+entry:
     ldr sp, =stack_top
     bl kmain
     b .
