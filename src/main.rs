@@ -10,6 +10,10 @@ mod drivers {
     pub mod uart;
 }
 
+mod tasks {
+    pub mod init;
+}
+
 mod utils {
     pub mod lazy;
     pub mod mutex;
@@ -27,5 +31,6 @@ fn panic(info: &PanicInfo) -> ! {
 
 #[no_mangle]
 extern "C" fn kmain() {
-    uart_println!("Hello, world!");
+    executor::push(tasks::init::main());
+    executor::run();
 }
