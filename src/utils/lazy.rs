@@ -7,8 +7,8 @@ pub struct Lazy<T, F = fn() -> T> {
 }
 
 impl<T, F> Lazy<T, F> {
-    pub const fn new(f: F) -> Lazy<T, F> {
-        Lazy {
+    pub const fn new(f: F) -> Self {
+        Self {
             cell: OnceCell::new(),
             init: Cell::new(Some(f)),
         }
