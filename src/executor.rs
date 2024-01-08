@@ -26,7 +26,7 @@ fn waker() -> Waker {
 }
 
 fn raw_waker() -> RawWaker {
-    fn skip(_: *const ()) {}
+    const fn skip(_: *const ()) {}
     fn clone(_: *const ()) -> RawWaker {
         raw_waker()
     }
