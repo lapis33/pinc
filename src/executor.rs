@@ -3,7 +3,8 @@ use alloc::{boxed::Box, collections::VecDeque};
 use core::{
     future::Future,
     pin::Pin,
-    task::{Context, Poll, RawWaker, RawWakerVTable, Waker}, ptr::null,
+    ptr::null,
+    task::{Context, Poll, RawWaker, RawWakerVTable, Waker},
 };
 
 static TASKS: Mutex<VecDeque<Task>> = Mutex::new(VecDeque::new());
