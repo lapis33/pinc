@@ -29,13 +29,13 @@ impl Uart {
 
     fn read_lsr_thre() -> bool {
         unsafe {
-            ((Uart::UART0_BASE + Uart::UART_LSR_OFFSET) as *mut u32).read_volatile() & (1 << 5) != 0
+            ((Self::UART0_BASE + Self::UART_LSR_OFFSET) as *mut u32).read_volatile() & (1 << 5) != 0
         }
     }
 
     fn write_thr(byte: u8) {
         unsafe {
-            ((Uart::UART0_BASE + Uart::UART_THR_OFFSET) as *mut u8).write_volatile(byte);
+            ((Self::UART0_BASE + Self::UART_THR_OFFSET) as *mut u8).write_volatile(byte);
         }
     }
 }
@@ -44,8 +44,8 @@ impl Write for Uart {
     fn write_str(&mut self, s: &str) -> Result {
         for byte in s.replace('\n', "\n\r").bytes() {
             loop {
-                if Uart::read_lsr_thre() {
-                    Uart::write_thr(byte);
+                if Self::read_lsr_thre() {
+                    Self::write_thr(byte);
                     break;
                 }
             }
