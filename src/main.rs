@@ -4,6 +4,7 @@
 extern crate alloc;
 
 mod allocator;
+mod executor;
 
 mod drivers {
     pub mod uart;
