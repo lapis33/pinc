@@ -15,7 +15,6 @@ mod tasks {
 }
 
 mod utils {
-    pub mod const_assert;
     pub mod lazy;
     pub mod mutex;
 }
