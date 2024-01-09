@@ -54,8 +54,8 @@ impl Uart {
             if Self::read_lsr_dr() {
                 return match Self::read_thr() as char {
                     '\r' => '\n',
-                    other => other
-                }
+                    other => other,
+                };
             }
         }
     }
