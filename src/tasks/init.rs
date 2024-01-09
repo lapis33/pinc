@@ -1,7 +1,6 @@
 use crate::uart_println;
 
-pub async fn main() {
-    uart_println!(r#"
+const LOGO: &str = r#"
                /$$                    
               |__/                    
       /$$$$$$  /$$ /$$$$$$$   /$$$$$$$
@@ -12,6 +11,9 @@ pub async fn main() {
     | $$____/ |__/|__/  |__/ \_______/
     | $$                              
     | $$                              
-    |__/                              
-    "#);
+    |__/                             
+"#;
+
+pub async fn main() {
+    uart_println!("{}", LOGO);
 }
